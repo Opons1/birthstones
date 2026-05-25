@@ -90,6 +90,12 @@ local function create_tools_for_material(material, display_name, uses_vs_env, ti
 			material = "birthstones:" .. material
 		})
 	end
+	if minetest.get_modpath("toolranks") then
+		toolranks.add_tool("birthstones:pick_" .. string.lower(material))
+		toolranks.add_tool("birthstones:axe_" .. string.lower(material))
+		toolranks.add_tool("birthstones:shovel_" .. string.lower(material))
+		toolranks.add_tool("birthstones:sword_" .. string.lower(material))
+	end
 end
 
 -- END OF FUNCTIONS

@@ -1,5 +1,5 @@
 local STONE = "default:stone"
-local SCARCITY = 800000
+local SCARCITY = 1600000
 
 -- Alexandrite
 core.register_ore({

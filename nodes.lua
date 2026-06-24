@@ -29,102 +29,51 @@ local function get_block_tiles(name)
 	return path
 end
 
-minetest.register_node( "birthstones:stone_with_alexandrite", {
-	description = "Stone with Alexandrite",
-	tiles = { "default_stone.png^birthstones_mineral_alexandrite.png" },
-	is_ground_content = true,
-	groups = {cracky=1},
-	sounds = default.node_sound_stone_defaults(),
-	drop = "birthstones:alexandrite",
-})
-minetest.register_node( "birthstones:stone_with_amethyst", {
-	description = "Stone with Amethyst",
-	tiles = { "default_stone.png^birthstones_mineral_amethyst.png" },
-	is_ground_content = true,
-	groups = {cracky=1},
-	sounds = default.node_sound_stone_defaults(),
-	drop = "birthstones:amethyst",
-})
-minetest.register_node( "birthstones:stone_with_aquamarine", {
-	description = "Stone with Aquamarine",
-	tiles = { "default_stone.png^birthstones_mineral_aquamarine.png" },
-	is_ground_content = true,
-	groups = {cracky=1},
-	sounds = default.node_sound_stone_defaults(),
-	drop = "birthstones:aquamarine",
-})
-minetest.register_node( "birthstones:stone_with_diamond", {
-	description = "Stone with White Diamond",
-	tiles = { "default_stone.png^birthstones_mineral_diamond.png" },
-	is_ground_content = true,
-	groups = {cracky=1},
-	sounds = default.node_sound_stone_defaults(),
-	drop = "birthstones:diamond",
-})
-minetest.register_node( "birthstones:stone_with_emerald", {
-	description = "Stone with Emerald",
-	tiles = { "default_stone.png^birthstones_mineral_emerald.png" },
-	is_ground_content = true,
-	groups = {cracky=1},
-	sounds = default.node_sound_stone_defaults(),
-	drop = "birthstones:emerald",
-})
-minetest.register_node( "birthstones:stone_with_garnet", {
-	description = "Stone with Garnet",
-	tiles = { "default_stone.png^birthstones_mineral_garnet.png" },
-	is_ground_content = true,
-	groups = {cracky=1},
-	sounds = default.node_sound_stone_defaults(),
-	drop = "birthstones:garnet",
-})
-minetest.register_node( "birthstones:stone_with_opal", {
-	description = "Stone with Opal",
-	tiles = { "default_stone.png^birthstones_mineral_opal.png" },
-	is_ground_content = true,
-	groups = {cracky=1},
-	sounds = default.node_sound_stone_defaults(),
-	drop = "birthstones:opal",
-})
-minetest.register_node( "birthstones:stone_with_peridot", {
-	description = "Stone with Peridot",
-	tiles = { "default_stone.png^birthstones_mineral_peridot.png" },
-	is_ground_content = true,
-	groups = {cracky=1},
-	sounds = default.node_sound_stone_defaults(),
-	drop = "birthstones:peridot",
-})
-minetest.register_node( "birthstones:stone_with_ruby", {
-	description = "Stone with Ruby",
-	tiles = { "default_stone.png^birthstones_mineral_ruby.png" },
-	is_ground_content = true,
-	groups = {cracky=1},
-	sounds = default.node_sound_stone_defaults(),
-	drop = "birthstones:ruby",
-})
-minetest.register_node( "birthstones:stone_with_sapphire", {
-	description = "Stone with Sapphire",
-	tiles = { "default_stone.png^birthstones_mineral_sapphire.png" },
-	is_ground_content = true,
-	groups = {cracky=1},
-	sounds = default.node_sound_stone_defaults(),
-	drop = "birthstones:sapphire",
-})
-minetest.register_node( "birthstones:stone_with_topaz", {
-	description = "Stone with Topaz",
-	tiles = { "default_stone.png^birthstones_mineral_topaz.png" },
-	is_ground_content = true,
-	groups = {cracky=1},
-	sounds = default.node_sound_stone_defaults(),
-	drop = "birthstones:topaz",
-})
-minetest.register_node( "birthstones:stone_with_zircon", {
-	description = "Stone with Zircon",
-	tiles = { "default_stone.png^birthstones_mineral_zircon.png" },
-	is_ground_content = true,
-	groups = {cracky=1},
-	sounds = default.node_sound_stone_defaults(),
-	drop = "birthstones:zircon",
-})
+--like this since i wanted to modify drops to make it unsievable
+
+local gems = {
+	{ore = "alexandrite", desc = "Alexandrite"},
+	{ore = "amethyst", desc = "Amethyst"},
+	{ore = "aquamarine", desc = "Aquamarine"},
+	{ore = "diamond", desc = "White Diamond"},
+	{ore = "emerald", desc = "Emerald"},
+	{ore = "garnet", desc = "Garnet"},
+	{ore = "opal", desc = "Opal"},
+	{ore = "peridot", desc = "Peridot"},
+	{ore = "ruby", desc = "Ruby"},
+	{ore = "sapphire", desc = "Sapphire"},
+	{ore = "topaz", desc = "Topaz"},
+	{ore = "zircon", desc = "Zircon"},
+}
+
+for _, gem in ipairs(gems) do
+	minetest.register_node("birthstones:stone_with_" .. gem.ore, {
+		description = "Stone with " .. gem.desc,
+		tiles = {
+			"default_stone.png^birthstones_mineral_" .. gem.ore .. ".png"
+		},
+		is_ground_content = true,
+		groups = {cracky = 1},
+		sounds = default.node_sound_stone_defaults(),
+
+		drop = {
+			max_items = 3,
+			items = {
+				{
+					items = {"birthstones:" .. gem.ore},
+				},
+				{
+					items = {"birthstones:" .. gem.ore},
+					rarity = 2,
+				},
+				{
+					items = {"birthstones:" .. gem.ore},
+					rarity = 3,
+				},
+			},
+		},
+	})
+end
 
 -- END RAW MATERIALS
 
